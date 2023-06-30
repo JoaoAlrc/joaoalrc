@@ -1,11 +1,24 @@
-.first-section {
-  width: 964px;
-  height: 610px;
+.container {
+  width: 1024px;
+  height: 670px;
+  overflow: hidden;
   border-radius: 20px;
+  overflow-y: scroll;
+}
+
+.first-section {
+  position: relative;
   background: #161925;
+  height: 670px;
+  margin: 0 auto;
+  padding: 4rem;
+}
+
+.last-section {
+  background: #eadeda;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem;
 }
 
 .joaoalrc {
@@ -57,6 +70,7 @@
   position: relative;
   display: inline-block;
   padding: 16px 32px;
+  text-align: center;
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
@@ -64,6 +78,7 @@
   border: solid 1px #eadeda;
   border-radius: 4px;
   overflow: hidden;
+  margin-right: 16px;
 }
 
 .button .border {
@@ -113,4 +128,31 @@
 
 .button:hover .label-hover .inner {
   transform: translateY(0);
+}
+
+.contactLinks {
+  position: absolute;
+  display: flex;
+  bottom: 4rem;
+  left: 4rem;
+  right: 4rem;
+}
+
+.activities {
+  margin-top: 20px;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.year {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.role {
+  font-style: italic;
 }

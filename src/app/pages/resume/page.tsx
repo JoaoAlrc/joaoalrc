@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+"use client";
 
-import joaoalrc from "../../assets/joaoalrc.svg";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 import "./style.css";
+import { contactLinks } from "@/utils/links";
 
 interface TypingEffectProps {
   text: string;
@@ -54,7 +55,6 @@ const Resume: React.FC = () => {
     const passionTimeout = setTimeout(() => {
       setShowPassion(true);
     }, 2500);
-    // }, 4400);
 
     const infoTimeout = setTimeout(() => {
       setShowInfo(true);
@@ -71,8 +71,7 @@ const Resume: React.FC = () => {
       clearTimeout(ideaTimeout);
     };
   }, []);
-
-  const [showTexts, setShowTexts] = useState<number[]>([]);
+ 
   const name = useMemo(
     () =>
       showName && (
@@ -138,60 +137,38 @@ const Resume: React.FC = () => {
       ),
     [showIdea, t]
   );
+  const contacts = useMemo(
+    () => (
+      <div className="contactLinks">
+        {contactLinks.map((item, index) => (
+          <a
+            className="button"
+            href={item.link}
+            target="_blank"
+            key={index.toString()}
+          >
+            <span className="border"></span>
+            <span className="label">{item.name}</span>
+            <span className="label-hover">
+              <span className="inner">{item.name}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    ),
+    []
+  );
 
   return (
     <div className="container">
-      <section className="first-section">
+      <div className="first-section">
         {name}
         {role}
         {passion}
         {info}
         {ideas}
-        <a
-          className="button"
-          href="https://www.linkedin.com/in/joaoalrc/"
-          target="_blank"
-        >
-          <span className="border"></span>
-          <span className="label">Linkedin</span>
-          <span className="label-hover">
-            <span className="inner">Linkedin</span>
-          </span>
-        </a>
-        <a
-          className="button"
-          href="https://github.com/JoaoAlrc/"
-          target="_blank"
-        >
-          <span className="border"></span>
-          <span className="label">GitHub</span>
-          <span className="label-hover">
-            <span className="inner">GitHub</span>
-          </span>
-        </a>
-        <a
-          className="button"
-          href="https://www.linkedin.com/in/joaoalrc/"
-          target="_blank"
-        >
-          <span className="border"></span>
-          <span className="label">Instagram</span>
-          <span className="label-hover">
-            <span className="inner">Instagram</span>
-          </span>
-        </a>
-        <a
-          className="button"
-          href="mailto:code@joaoalrc.dev?cc=jv.alarcao@gmail.com&subject=Let's%20turn%20my%20dreams%20into%20codes!"
-          target="_blank"
-        >
-          <span className="border"></span>
-          <span className="label">Mail</span>
-          <span className="label-hover">
-            <span className="inner">Mail</span>
-          </span>
-        </a>
-      </section>
+        {contacts}
+      </div>
     </div>
   );
 };
