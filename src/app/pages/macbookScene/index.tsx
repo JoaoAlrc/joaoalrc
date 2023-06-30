@@ -15,7 +15,7 @@ import { useControls } from "leva";
 
 import { useFrame } from "@react-three/fiber";
 import { useState } from "react";
-import Resume from "../resume";
+import Resume from "../resume/page";
 
 import "./style.css";
 import { macbookLink } from "@/utils/links";
@@ -110,12 +110,14 @@ function MacbookScene() {
           <primitive
             object={macbook.scene}
             position={modelPosition}
-            onPointerEnter={(e) => {
-              e.target.setPointerCapture(e.pointerId);
+            onPointerEnter={(e: React.PointerEvent<HTMLDivElement>) => {
+              const target = e.currentTarget;
+              target.setPointerCapture(e.pointerId);
               setMouseOn(true);
             }}
-            onPointerLeave={(e) => {
-              e.target.releasePointerCapture(e.pointerId);
+            onPointerLeave={(e: React.PointerEvent<HTMLDivElement>) => {
+              const target = e.currentTarget;
+              target.releasePointerCapture(e.pointerId);
               setMouseOn(false);
             }}
           >
