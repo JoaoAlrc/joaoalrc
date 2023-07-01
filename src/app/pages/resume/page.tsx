@@ -8,7 +8,7 @@ import TypingEffect from "@/app/components/TypingEffect";
 import Contacts from "./components/Contacts";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
-import joaoalrc from "@/app/assets/joaoalrc.svg";
+import joaoalrc from "@/app/assets/joaoalrcpng.png";
 import iconDown from "@/app/assets/iconDown.svg";
 
 import "./style.css";
