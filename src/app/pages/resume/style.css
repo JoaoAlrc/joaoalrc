@@ -1,7 +1,6 @@
 .container {
   width: 1024px;
   height: 670px;
-  overflow: hidden;
   border-radius: 20px;
   overflow-y: scroll;
 }
@@ -17,6 +16,7 @@
 .last-section {
   background: #eadeda;
   max-width: 1280px;
+  height: fit-content;
   margin: 0 auto;
   padding: 4rem;
 }
@@ -25,134 +25,67 @@
   bottom: 0;
   position: absolute;
   padding: 0;
-  height: 21.875rem;
+  height: 14.875rem;
   left: 0;
-  width: 16.5625rem;
+  width: 11.2625rem;
 }
 
-.fade-in {
+.name {
+  font-size: 48px;
+  line-height: 0;
+  color: #eadeda;
+}
+
+.nameContainer {
+  margin-bottom: 2rem;
+}
+
+.role {
+  font-size: 32px;
+  color: #eadeda;
+}
+
+.roleContainer {
+  margin-bottom: 2rem;
+}
+
+.info {
+  font-size: 22px;
+  color: #eadeda;
+}
+
+.infoContainer {
+  margin-bottom: 1rem;
+}
+
+.animated-icon {
+  position: absolute;
+  right: 3rem;
+  bottom: 3rem;
+  animation: jump 2.5s infinite;
+}
+
+.scroll-icon {
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
 
-.fade-in.show {
+.scroll-icon.show {
   opacity: 1;
 }
 
-.fade {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.transitioning {
-  opacity: 0;
-}
-
-.name {
-  font-family: fantasy;
-  font-size: 64px;
-  color: #eadeda;
-}
-
-.role {
-  font-family: fantasy;
-  font-size: 48px;
-  color: #eadeda;
-}
-
-.info {
-  font-family: fantasy;
-  font-size: 24px;
-  color: #eadeda;
-}
-
-.button {
-  position: relative;
-  display: inline-block;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #eadeda;
-  border: solid 1px #eadeda;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-right: 16px;
-}
-
-.button .border {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #eadeda;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease-out;
-}
-
-.button:hover .border {
-  transform: scaleX(1);
-}
-
-.button .label {
-  position: relative;
-  z-index: 1;
-}
-
-.button .label-hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #161925;
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-}
-
-.button:hover .label-hover {
-  z-index: 1 !important;
-  opacity: 1;
-}
-
-.button .label-hover .inner {
-  transform: translateY(100%);
-  transition: transform 0.3s ease-out;
-}
-
-.button:hover .label-hover .inner {
-  transform: translateY(0);
-}
-
-.contactLinks {
-  position: absolute;
-  display: flex;
-  bottom: 4rem;
-  left: 4rem;
-  right: 4rem;
-}
-
-.activities {
-  margin-top: 20px;
-}
-
-.activity {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.year {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.role {
-  font-style: italic;
-}
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-50px);
+  }
+  40% {
+    transform: translateY(0px);
+  }
+  66% {
+    transform: translateY(-50px);
+  }
+} 

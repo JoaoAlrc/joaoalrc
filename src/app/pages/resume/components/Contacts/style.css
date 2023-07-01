@@ -1,0 +1,7 @@
+.contactLinks {
+  position: absolute;
+  display: flex;
+  bottom: 4rem;
+  left: 12.875rem;
+  right: 4rem;
+}

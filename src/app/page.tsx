@@ -1,28 +1,47 @@
 "use client";
 
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Roboto } from "next/font/google";
-import { Canvas } from "@react-three/fiber";
-import MacbookScene from "./pages/macbookScene";
-
 import "./i18n";
 
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "700"],
-});
+import { Canvas } from "@react-three/fiber";
+import Head from "next/head";
+
+import MacbookScene from "./pages/macbookScene";
+
+import { isMobileDevice } from "@/utils";
+
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <main className={`${styles.scene}`}>
+    <main className={styles.scene}>
+      <Head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicons/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/favicons/site.webmanifest" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <Canvas
         flat
         camera={{
-          fov: 45,
+          fov: isMobileDevice ? 60 : 45,
           near: 0.1,
           far: 200,
-          position: [-4, 3, 6],
+          position: isMobileDevice ? [0, 3, 6] : [-4, 3, 6],
         }}
       >
         <MacbookScene />
