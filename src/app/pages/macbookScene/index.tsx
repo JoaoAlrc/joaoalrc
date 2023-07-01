@@ -42,7 +42,7 @@ function MacbookScene() {
   return (
     <>
       <color args={["#241a1a"]} attach="background" />
-      <Environment path="/assets/" files="./environment.hdr" /> 
+      <Environment path="/assets/" files="./environment.hdr" />
 
       {/* Macbook focus */}
       <PresentationControls
@@ -121,7 +121,14 @@ function MacbookScene() {
       </PresentationControls>
 
       {/* Macbook shadows */}
-      <ContactShadows position-y={-1.4} opacity={0.4} scale={5} blur={2.4} />
+
+      <ContactShadows
+        position-y={isMobileDevice ? -2 : -1.4}
+        rotation={isMobileDevice ? [-0.2, -0.5, 0] : [0, 0, 0.1]}
+        opacity={0.4}
+        scale={isMobileDevice ? 3 : 5}
+        blur={2.4}
+      />
     </>
   );
 }
