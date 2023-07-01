@@ -1,46 +1,23 @@
-"use client";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next"; 
+import TypingEffect from "@/app/components/TypingEffect";
+import Contacts from "./components/Contacts";
+import Experience from "./components/Experience";
+import Skills from "./components/Skills";
+import joaoalrc from "@/app/assets/joaoalrc.svg";
+import iconDown from "@/app/assets/iconDown.svg";
 
 import "./style.css";
-import { contactLinks } from "@/utils/links";
-
-interface TypingEffectProps {
-  text: string;
-  className: string;
-  velocity: number;
-}
-
-const TypingEffect: React.FC<TypingEffectProps> = ({
-  text,
-  className,
-  velocity,
-}) => {
-  const [currentText, setCurrentText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const typingTimeout = setTimeout(() => {
-        setCurrentText((prevText) => prevText + text[currentIndex]);
-        setCurrentIndex((prevIndex) => prevIndex + 1);
-      }, velocity);
-
-      return () => {
-        clearTimeout(typingTimeout);
-      };
-    }
-  }, [text, currentIndex, velocity]);
-
-  return <span className={className}>{currentText}</span>;
-};
 
 const Resume: React.FC = () => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [showName, setShowName] = useState<boolean>(false);
   const [showRole, setShowRole] = useState<boolean>(false);
+  const [showScrollIcon, setShowScrollIcon] = useState<boolean>(false);
   const [showPassion, setShowPassion] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [showIdea, setShowIdea] = useState<boolean>(false);
@@ -62,16 +39,36 @@ const Resume: React.FC = () => {
 
     const ideaTimeout = setTimeout(() => {
       setShowIdea(true);
-    }, 8000);
+    }, 11000);
+
+    const showScrollIconTimeout = setTimeout(() => {
+      setShowScrollIcon(true);
+    }, 18400);
 
     return () => {
       clearTimeout(roleTimeout);
       clearTimeout(passionTimeout);
       clearTimeout(infoTimeout);
       clearTimeout(ideaTimeout);
+      clearTimeout(showScrollIconTimeout);
     };
   }, []);
- 
+
+  //Hide double down icon on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef?.current?.scrollTop! > 0 && !!showScrollIcon) {
+        setShowScrollIcon(false);
+      }
+    };
+
+    containerRef?.current?.addEventListener("scroll", handleScroll);
+
+    return () => {
+      containerRef?.current?.removeEventListener("scroll", handleScroll);
+    };
+  }, [showScrollIcon]);
+
   const name = useMemo(
     () =>
       showName && (
@@ -88,7 +85,7 @@ const Resume: React.FC = () => {
   const role = useMemo(
     () =>
       showRole && (
-        <div>
+        <div className="roleContainer">
           <TypingEffect
             text={t("resume.role")}
             className="role"
@@ -101,7 +98,7 @@ const Resume: React.FC = () => {
   const passion = useMemo(
     () =>
       showPassion && (
-        <div>
+        <div className="infoContainer">
           <TypingEffect
             className="info"
             text={t("resume.passion")}
@@ -114,7 +111,7 @@ const Resume: React.FC = () => {
   const info = useMemo(
     () =>
       showInfo && (
-        <div>
+        <div className="infoContainer">
           <TypingEffect
             className="info"
             text={t("resume.info")}
@@ -127,7 +124,7 @@ const Resume: React.FC = () => {
   const ideas = useMemo(
     () =>
       showIdea && (
-        <div>
+        <div className="infoContainer">
           <TypingEffect
             className="info"
             text={t("resume.ideas")}
@@ -137,38 +134,35 @@ const Resume: React.FC = () => {
       ),
     [showIdea, t]
   );
-  const contacts = useMemo(
+
+  const scrollIcon = useMemo(
     () => (
-      <div className="contactLinks">
-        {contactLinks.map((item, index) => (
-          <a
-            className="button"
-            href={item.link}
-            target="_blank"
-            key={index.toString()}
-          >
-            <span className="border"></span>
-            <span className="label">{item.name}</span>
-            <span className="label-hover">
-              <span className="inner">{item.name}</span>
-            </span>
-          </a>
-        ))}
-      </div>
+      <Image
+        height={80}
+        alt="icon scroll"
+        src={iconDown}
+        className={`animated-icon scroll-icon ${showScrollIcon && "show"}`}
+      />
     ),
-    []
+    [showScrollIcon]
   );
 
   return (
-    <div className="container">
-      <div className="first-section">
+    <div ref={containerRef} className="container">
+      <section className="first-section">
         {name}
         {role}
         {passion}
         {info}
         {ideas}
-        {contacts}
-      </div>
+        <Contacts />
+        <Image alt="logo" src={joaoalrc} className="joaoalrc" />
+        {scrollIcon}
+      </section>
+      <section className="last-section">
+        <Experience />
+        <Skills />
+      </section>
     </div>
   );
 };

@@ -1,8 +1,18 @@
 {
   "resume": {
-    "role": "Software Developer",
-    "passion": "Passionate software developer based in Brazil, specializing in web and mobile development.",
-    "info": "Experienced in technologies like React Native, ReactJS, and Three.js.",
-    "ideas": "Skilled in crafting innovative solutions and bringing ideas to life."
+    "role": "Software Engineer",
+    "passion": "Passionate software engineer based in Brazil, specializing in web and mobile development.",
+    "info": "With extensive experience in technologies such as React Native, ReactJS, and Three.js. Also knowledgeable in frameworks like Vue.js, AngularJS, and Node.js (MySQL).",
+    "ideas": "Specialized in creating innovative solutions and bringing ideas to life."
+  },
+  "experiences": {
+    "experience": "EXPERIENCES",
+    "today": "TODAY",
+    "db1": "Senior Software Engineer - UDS, DB1, SP (Remote)",
+    "lean": "Senior React Native Developer - Lean Solutions Group, Coral Springs , FL (Remote)",
+    "sebrae": "Senior React Native Developer - Cast Group at Sebrae, PB (Remote)",
+    "neki": "Senior ReactJS Developer - Neki-IT, RJ (Remote)",
+    "cashPago": "Middle React Native Developer - CashPago, SP (Remote - Freelancer)",
+    "space": "FullStack Developer (Junior - Middle) - Space AdServer/2mobile, Brasília - DF"
   }
 }
