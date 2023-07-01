@@ -1,8 +1,18 @@
 {
   "resume": {
-    "role": "Desenvolvedor de Software",
-    "passion": "Desenvolvedor de software apaixonado, localizado no Brasil, especializado em desenvolvimento web e mobile.",
-    "info": "Experiência em tecnologias como React Native, ReactJS e Three.js.",
-    "ideas": "Habilidades em criar soluções inovadoras e dar vida a ideias."
+    "role": "Engenheiro de Software",
+    "passion": "Engenheiro de Software localizado no Brasil, especializado em desenvolvimento web e mobile.",
+    "info": "Com larga experiência em tecnologias como React Native, ReactJS e Three.js. Mas também com conhecimento em frameworks como Vue.js, Angular JS e Node JS (MySQL)",
+    "ideas": "Especialista em criar soluções inovadoras e dar vida a ideias."
+  },
+  "experiences": {
+    "experience": "EXPERIÊNCIAS",
+    "today": "HOJE",
+    "db1": "Engenheiro de Software Sênior - UDS, DB1, SP (Remoto)",
+    "lean": "Desenvolvedor React Native Senior - Lean Solutions Group, Coral Springs , FL (Remoto)",
+    "sebrae": "Desenvolvedor React Native Senior - Cast Group no app Sebrae, PB (Remoto)",
+    "neki": "Desenvolvedor ReactJs Senior - Neki-IT, RJ (Remoto)",
+    "cashPago": "Desenvolvedor React Native Pleno - CashPago, SP (Remoto - Freelancer)",
+    "space": "Desenvolvedor FullStack (Junior - Pleno) - Space AdServer/2mobile, Brasília - DF"
   }
 }

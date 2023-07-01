@@ -1,0 +1,36 @@
+.titleExperiences {
+  line-height: 0;
+  margin-bottom: 3rem;
+  color: #161925;
+}
+
+.experience {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.yearView {
+  background: #161925;
+  padding: 4px;
+  width: 80px;
+  text-align: center;
+  margin-right: 16px;
+}
+
+.year {
+  font-weight: bold;
+  color: #eadeda;
+}
+
+.separator {
+  font-weight: bold;
+  margin-right: 16px;
+  color: #161925;
+}
+
+.experienceRole {
+  margin-left: 16px;
+  font-style: italic;
+  color: #161925;
+}
