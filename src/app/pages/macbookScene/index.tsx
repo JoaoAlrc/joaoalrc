@@ -81,7 +81,7 @@ function MacbookScene() {
     height: { value: 1.65, step: 0.1 },
     intensity: { value: 65, step: 0.1 },
     rotationMacbook: {
-      value: isMobileDevice ? [-0.2, -0.5, 0] : [-0.2, 0.5, 0.1],
+      value: isMobileDevice ? [-0.2, -0.5, 0] : [0, 0, 0.1],
       step: 0.1,
     },
     polar: { value: isMobileDevice ? [0, 0.2] : [0, 0.2], step: 0.1 },
@@ -90,12 +90,15 @@ function MacbookScene() {
   });
 
   useFrame((state) => {
+    const zoom = isMobileDevice ? 1.6 : 2.3;
+    const cameraX = isMobileDevice ? 0 : -1.3;
+    const cameraY = isMobileDevice ? 1 : 1.25;
     state.camera.zoom = THREE.MathUtils.lerp(
       state.camera.zoom,
-      mouseOn ? 1.6 : 1,
+      mouseOn ? zoom : 1,
       mouseOn ? 0.025 : 0.15
     );
-    state.camera.lookAt(0, 1, 2);
+    state.camera.lookAt(cameraX, cameraY, 2);
 
     state.camera.updateProjectionMatrix();
   });
