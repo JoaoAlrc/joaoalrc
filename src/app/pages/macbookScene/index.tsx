@@ -12,7 +12,6 @@ import {
   useMatcapTexture,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useControls } from "leva";
 
 import Resume from "../resume/page";
 
@@ -25,69 +24,6 @@ function MacbookScene() {
   const macbook = useGLTF(macbookLink);
   const [matcapTexture] = useMatcapTexture("9D8F84_5D4544_D9D3C9_62555A", 256);
   const [mouseOn, setMouseOn] = useState<boolean>(false);
-  const {
-    modelPosition,
-    namePosition,
-    nameRotation,
-    nameSize,
-    nameScale,
-    surnamePosition,
-    surnameRotation,
-    surnameScale,
-    surnameSize,
-    lightPosition,
-    lightRotation,
-    distanceFactor,
-    position,
-    rotation,
-    width,
-    height,
-    intensity,
-    rotationMacbook,
-    polar,
-    azimuth,
-    color,
-  } = useControls("test", {
-    modelPosition: {
-      value: isMobileDevice ? [0, -2, 0] : [0, -1.6, 0],
-      step: 0.1,
-    },
-    namePosition: {
-      value: isMobileDevice ? [-1.8, 2, -2] : [3.3, 1, -1.9],
-      step: 0.1,
-    },
-    nameRotation: {
-      value: isMobileDevice ? [-0.3, 0.1, 0] : [0, -1, 0],
-      step: 0.1,
-    },
-    nameSize: { value: isMobileDevice ? 0.7 : 0.65, step: 0.1 },
-    nameScale: { value: isMobileDevice ? 0.6 : 0.65, step: 0.1 },
-    surnamePosition: {
-      value: isMobileDevice ? [-2.5, 1.3, -5] : [2.3, 0.4, -1.8],
-      step: 0.1,
-    },
-    surnameRotation: {
-      value: isMobileDevice ? [-0.3, 0.1, 0] : [0, -1, 0],
-      step: 0.1,
-    },
-    surnameScale: { value: isMobileDevice ? 0.7 : 0.65, step: 0.1 },
-    surnameSize: { value: isMobileDevice ? 0.6 : 0.65, step: 0.1 },
-    lightPosition: { value: [0, 0.55, -1.15], step: 0.1 },
-    lightRotation: { value: [-0.1, Math.PI, 0], step: 0.1 },
-    distanceFactor: { value: 1.17, step: 0.1 },
-    position: { value: [0, 1.56, -1.4], step: 0.1 },
-    rotation: { value: [-0.256, 0, 0], step: 0.1 },
-    width: { value: 2.5, step: 0.1 },
-    height: { value: 1.65, step: 0.1 },
-    intensity: { value: 65, step: 0.1 },
-    rotationMacbook: {
-      value: isMobileDevice ? [-0.2, -0.5, 0] : [0, 0, 0.1],
-      step: 0.1,
-    },
-    polar: { value: isMobileDevice ? [0, 0.2] : [0, 0.2], step: 0.1 },
-    azimuth: { value: isMobileDevice ? [0, 0.5] : [-0.5, 0.5], step: 0.1 },
-    color: "orange",
-  });
 
   useFrame((state) => {
     const zoom = isMobileDevice ? 1.6 : 2.3;
@@ -106,33 +42,32 @@ function MacbookScene() {
   return (
     <>
       <color args={["#241a1a"]} attach="background" />
-      <Environment path="/assets/" files="./environment.hdr" />
-      {/* <Perf position="top-left" /> */}
+      <Environment path="/assets/" files="./environment.hdr" /> 
 
       {/* Macbook focus */}
       <PresentationControls
         global
-        rotation={rotationMacbook}
-        polar={polar}
-        azimuth={azimuth}
+        rotation={isMobileDevice ? [-0.2, -0.5, 0] : [0, 0, 0.1]}
+        polar={isMobileDevice ? [0, 0.2] : [0, 0.2]}
+        azimuth={isMobileDevice ? [0, 0.5] : [-0.5, 0.5]}
         config={{ mass: 2, tension: 400 }}
       >
         <Float rotationIntensity={mouseOn ? 0 : 0.4}>
           {/* Macbook light */}
 
           <rectAreaLight
-            width={width}
-            height={height}
-            intensity={intensity}
+            width={2.5}
+            height={1.65}
+            intensity={65}
             color={"blue"}
-            rotation={lightRotation}
-            position={lightPosition}
+            rotation={[-0.1, Math.PI, 0]}
+            position={[0, 0.55, -1.15]}
           />
 
           {/* Macbook */}
           <primitive
             object={macbook.scene}
-            position={modelPosition}
+            position={isMobileDevice ? [0, -2, 0] : [0, -1.6, 0]}
             onPointerEnter={(e: React.PointerEvent<HTMLDivElement>) => {
               if (!!isMobileDevice) return;
               const target = e.currentTarget;
@@ -153,29 +88,29 @@ function MacbookScene() {
             <Html
               transform
               wrapperClass="htmlScreen"
-              distanceFactor={distanceFactor}
-              position={position}
-              rotation={rotation}
+              distanceFactor={1.17}
+              position={[0, 1.56, -1.4]}
+              rotation={[-0.256, 0, 0]}
             >
               <Resume />
             </Html>
           </primitive>
           <Text3D
             font="./fonts/Architects_Daughter/Architects_Daughter_Regular.json"
-            position={namePosition}
-            rotation={nameRotation}
-            scale={nameScale}
-            size={nameSize}
+            position={isMobileDevice ? [-1.8, 2, -2] : [3.3, 1, -1.9]}
+            rotation={isMobileDevice ? [-0.3, 0.1, 0] : [0, -1, 0]}
+            scale={isMobileDevice ? 0.6 : 0.65}
+            size={isMobileDevice ? 0.7 : 0.65}
           >
             JOÃO VICTOR
             <meshMatcapMaterial matcap={matcapTexture} />
           </Text3D>
           <Text3D
             font="./fonts/Architects_Daughter/Architects_Daughter_Regular.json"
-            position={surnamePosition}
-            rotation={surnameRotation}
-            scale={surnameScale}
-            size={surnameSize}
+            position={isMobileDevice ? [-2.5, 1.3, -5] : [2.3, 0.4, -1.8]}
+            rotation={isMobileDevice ? [-0.3, 0.1, 0] : [0, -1, 0]}
+            scale={isMobileDevice ? 0.7 : 0.65}
+            size={isMobileDevice ? 0.6 : 0.65}
           >
             ALARCÃO PEREIRA
             <meshMatcapMaterial matcap={matcapTexture} />
