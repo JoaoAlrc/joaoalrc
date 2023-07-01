@@ -1,0 +1,60 @@
+.skillsContainer {
+  padding-top: 3rem;
+}
+
+.skillsView {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+} 
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+.logo.mysql:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+.logo.typescript:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+.logo.redux:hover {
+  filter: drop-shadow(0 0 2em #764ABC);
+}
+.logo.next:hover {
+  filter: drop-shadow(0 0 2em #000000);
+}
+.logo.three:hover {
+  filter: drop-shadow(0 0 2em #000000);
+}
+.logo.reactFirebase:hover {
+  filter: drop-shadow(0 0 2em #F6820C);
+} 
+.logo.angular:hover {
+  filter: drop-shadow(0 0 2em #E23137);
+}
+.logo.node:hover {
+  filter: drop-shadow(0 0 2em #5DAC46);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #5DAC46);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spin {
+    animation: logo-spin infinite 20s linear;
+  }
+}

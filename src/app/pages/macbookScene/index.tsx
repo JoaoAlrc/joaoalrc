@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as THREE from "three";
 import {
   useGLTF,
@@ -10,21 +11,20 @@ import {
   Text3D,
   useMatcapTexture,
 } from "@react-three/drei";
-import { Perf } from "r3f-perf";
+import { useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 
-import { useFrame } from "@react-three/fiber";
-import { useState } from "react";
-import Resume from "../resume";
+import Resume from "../resume/page";
+
+import { macbookLink } from "@/utils/links";
+import { isMobileDevice } from "@/utils";
 
 import "./style.css";
-import { macbookLink } from "@/utils/links";
 
 function MacbookScene() {
   const macbook = useGLTF(macbookLink);
   const [matcapTexture] = useMatcapTexture("9D8F84_5D4544_D9D3C9_62555A", 256);
   const [mouseOn, setMouseOn] = useState<boolean>(false);
-
   const {
     modelPosition,
     namePosition,
@@ -48,15 +48,30 @@ function MacbookScene() {
     azimuth,
     color,
   } = useControls("test", {
-    modelPosition: { value: [0, -1.6, 0], step: 0.1 },
-    namePosition: { value: [3.3, 1, -1.9], step: 0.1 },
-    nameRotation: { value: [0, -1, 0], step: 0.1 },
-    nameSize: { value: 0.65, step: 0.1 },
-    nameScale: { value: 0.65, step: 0.1 },
-    surnamePosition: { value: [2.3, 0.4, -1.8], step: 0.1 },
-    surnameRotation: { value: [0, -1, 0], step: 0.1 },
-    surnameScale: { value: 0.65, step: 0.1 },
-    surnameSize: { value: 0.65, step: 0.1 },
+    modelPosition: {
+      value: isMobileDevice ? [0, -2, 0] : [0, -1.6, 0],
+      step: 0.1,
+    },
+    namePosition: {
+      value: isMobileDevice ? [-1.8, 2, -2] : [3.3, 1, -1.9],
+      step: 0.1,
+    },
+    nameRotation: {
+      value: isMobileDevice ? [-0.3, 0.1, 0] : [0, -1, 0],
+      step: 0.1,
+    },
+    nameSize: { value: isMobileDevice ? 0.7 : 0.65, step: 0.1 },
+    nameScale: { value: isMobileDevice ? 0.6 : 0.65, step: 0.1 },
+    surnamePosition: {
+      value: isMobileDevice ? [-2.5, 1.3, -5] : [2.3, 0.4, -1.8],
+      step: 0.1,
+    },
+    surnameRotation: {
+      value: isMobileDevice ? [-0.3, 0.1, 0] : [0, -1, 0],
+      step: 0.1,
+    },
+    surnameScale: { value: isMobileDevice ? 0.7 : 0.65, step: 0.1 },
+    surnameSize: { value: isMobileDevice ? 0.6 : 0.65, step: 0.1 },
     lightPosition: { value: [0, 0.55, -1.15], step: 0.1 },
     lightRotation: { value: [-0.1, Math.PI, 0], step: 0.1 },
     distanceFactor: { value: 1.17, step: 0.1 },
@@ -65,26 +80,31 @@ function MacbookScene() {
     width: { value: 2.5, step: 0.1 },
     height: { value: 1.65, step: 0.1 },
     intensity: { value: 65, step: 0.1 },
-    rotationMacbook: { value: [0, -0.2, -0.2], step: 0.1 },
-    polar: { value: [0, -0.2], step: 0.1 },
-    azimuth: { value: [-1, 0.75], step: 0.1 },
+    rotationMacbook: {
+      value: isMobileDevice ? [-0.2, -0.5, 0] : [-0.2, 0.5, 0.1],
+      step: 0.1,
+    },
+    polar: { value: isMobileDevice ? [0, 0.2] : [0, 0.2], step: 0.1 },
+    azimuth: { value: isMobileDevice ? [0, 0.5] : [-0.5, 0.5], step: 0.1 },
     color: "orange",
   });
 
   useFrame((state) => {
     state.camera.zoom = THREE.MathUtils.lerp(
       state.camera.zoom,
-      mouseOn ? 2.5 : 1,
+      mouseOn ? 1.6 : 1,
       mouseOn ? 0.025 : 0.15
     );
-    state.camera.lookAt(0, 0, 0);
+    state.camera.lookAt(0, 1, 2);
+
     state.camera.updateProjectionMatrix();
   });
+
   return (
     <>
       <color args={["#241a1a"]} attach="background" />
       <Environment path="/assets/" files="./environment.hdr" />
-      <Perf position="top-left" />
+      {/* <Perf position="top-left" /> */}
 
       {/* Macbook focus */}
       <PresentationControls
@@ -94,7 +114,7 @@ function MacbookScene() {
         azimuth={azimuth}
         config={{ mass: 2, tension: 400 }}
       >
-        <Float rotationIntensity={0.4}>
+        <Float rotationIntensity={mouseOn ? 0 : 0.4}>
           {/* Macbook light */}
 
           <rectAreaLight
@@ -110,13 +130,21 @@ function MacbookScene() {
           <primitive
             object={macbook.scene}
             position={modelPosition}
-            onPointerEnter={(e) => {
-              e.target.setPointerCapture(e.pointerId);
+            onPointerEnter={(e: React.PointerEvent<HTMLDivElement>) => {
+              if (!!isMobileDevice) return;
+              const target = e.currentTarget;
+              target.setPointerCapture(e.pointerId);
               setMouseOn(true);
             }}
-            onPointerLeave={(e) => {
-              e.target.releasePointerCapture(e.pointerId);
+            onPointerLeave={(e: React.PointerEvent<HTMLDivElement>) => {
+              if (!!isMobileDevice) return;
+              const target = e.currentTarget;
+              target.releasePointerCapture(e.pointerId);
               setMouseOn(false);
+            }}
+            onClick={() => {
+              if (!isMobileDevice) return;
+              setMouseOn(!mouseOn);
             }}
           >
             <Html
