@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as THREE from "three";
 import {
   useGLTF,
@@ -24,6 +24,8 @@ function MacbookScene() {
   const macbook = useGLTF(macbookLink);
   const [matcapTexture] = useMatcapTexture("9D8F84_5D4544_D9D3C9_62555A", 256);
   const [mouseOn, setMouseOn] = useState<boolean>(false);
+  const [easter, setEaster] = useState<boolean>(false);
+  const easterTextRef = useRef<THREE.Mesh | null>(null);
 
   useFrame((state) => {
     const zoom = isMobileDevice ? 1.6 : 2.3;
@@ -36,6 +38,20 @@ function MacbookScene() {
     );
     state.camera.lookAt(cameraX, cameraY, 2);
 
+    if (easter) {
+      const easterTextPosition = new THREE.Vector3();
+      easterTextRef.current?.getWorldPosition(easterTextPosition);
+      state.camera.lookAt(
+        easterTextPosition.x + 8,
+        easterTextPosition.y,
+        easterTextPosition.z
+      );
+      state.camera.zoom = THREE.MathUtils.lerp(
+        state.camera.zoom,
+        isMobileDevice ? 7 : 20,
+        0.15
+      );
+    }
     state.camera.updateProjectionMatrix();
   });
 
@@ -68,20 +84,7 @@ function MacbookScene() {
           <primitive
             object={macbook.scene}
             position={isMobileDevice ? [0, -2, 0] : [0, -1.6, 0]}
-            onPointerEnter={(e: React.PointerEvent<HTMLDivElement>) => {
-              if (!!isMobileDevice) return;
-              const target = e.currentTarget;
-              target.setPointerCapture(e.pointerId);
-              setMouseOn(true);
-            }}
-            onPointerLeave={(e: React.PointerEvent<HTMLDivElement>) => {
-              if (!!isMobileDevice) return;
-              const target = e.currentTarget;
-              target.releasePointerCapture(e.pointerId);
-              setMouseOn(false);
-            }}
             onClick={() => {
-              if (!isMobileDevice) return;
               setMouseOn(!mouseOn);
             }}
           >
@@ -116,6 +119,19 @@ function MacbookScene() {
             <meshMatcapMaterial matcap={matcapTexture} />
           </Text3D>
         </Float>
+        <Text3D
+          ref={easterTextRef}
+          font="./fonts/Architects_Daughter/Architects_Daughter_Regular.json"
+          position={isMobileDevice ? [-10, 30, -120] : [0, 0, -150]}
+          rotation={[0, 0, 0]}
+          onPointerEnter={() => setEaster(true)}
+          onClick={() => setEaster(isMobileDevice ? !easter : false)}
+          scale={isMobileDevice ? 0.7 : 0.65}
+          size={isMobileDevice ? 0.6 : 0.65}
+        >
+          O LIMITE É UMA FRONTEIRA CRIADA SÓ PELA MENTE
+          <meshMatcapMaterial matcap={matcapTexture} />
+        </Text3D>
         <Sparkles count={100} speed={1} opacity={6} size={1} scale={2} />
         <Sparkles count={50} speed={2} opacity={0.8} size={0.8} scale={10} />
       </PresentationControls>

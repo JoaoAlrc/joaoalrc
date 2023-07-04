@@ -14,6 +14,7 @@ const Skills: React.FC = () => {
           <a key={index.toString()} href={item.link} target="_blank">
             <Image
               src={item.src}
+              loader={({ src }) => src}
               height={item.size}
               className={item.className}
               alt={item.alt}
@@ -31,6 +32,7 @@ const Skills: React.FC = () => {
           <a key={index.toString()} href={item.link} target="_blank">
             <Image
               src={item.src}
+              loader={({ src }) => src}
               height={item.size}
               width={item.size}
               className={item.className}
