@@ -25,7 +25,7 @@ function MacbookScene() {
   const [matcapTexture] = useMatcapTexture("9D8F84_5D4544_D9D3C9_62555A", 256);
   const [mouseOn, setMouseOn] = useState<boolean>(false);
   const [easter, setEaster] = useState<boolean>(false);
-  const easterTextRef = useRef(null);
+  const easterTextRef = useRef<THREE.Mesh | null>(null);
 
   useFrame((state) => {
     const zoom = isMobileDevice ? 1.6 : 2.3;
@@ -40,7 +40,7 @@ function MacbookScene() {
 
     if (easter) {
       const easterTextPosition = new THREE.Vector3();
-      easterTextRef.current.getWorldPosition(easterTextPosition);
+      easterTextRef.current?.getWorldPosition(easterTextPosition);
       state.camera.lookAt(
         easterTextPosition.x + 8,
         easterTextPosition.y,
