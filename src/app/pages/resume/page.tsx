@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+"use client";
+
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 
@@ -6,7 +8,7 @@ import TypingEffect from "@/app/components/TypingEffect";
 import Contacts from "./components/Contacts";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
-import joaoalrc from "@/app/assets/joaoalrc.svg";
+import joaoalrc from "@/app/assets/joaoalrcpng.png";
 import iconDown from "@/app/assets/iconDown.svg";
 
 import "./style.css";
@@ -25,32 +27,16 @@ const Resume: React.FC = () => {
   useEffect(() => {
     setShowName(true);
 
-    const roleTimeout = setTimeout(() => {
-      setShowRole(true);
-    }, 1500);
-
-    const passionTimeout = setTimeout(() => {
-      setShowPassion(true);
-    }, 2500);
-
-    const infoTimeout = setTimeout(() => {
-      setShowInfo(true);
-    }, 5600);
-
-    const ideaTimeout = setTimeout(() => {
-      setShowIdea(true);
-    }, 11000);
-
-    const showScrollIconTimeout = setTimeout(() => {
-      setShowScrollIcon(true);
-    }, 18400);
+    const timeouts = [
+      setTimeout(() => setShowRole(true), 1500),
+      setTimeout(() => setShowPassion(true), 2500),
+      setTimeout(() => setShowInfo(true), 5600),
+      setTimeout(() => setShowIdea(true), 11000),
+      setTimeout(() => setShowScrollIcon(true), 15400),
+    ];
 
     return () => {
-      clearTimeout(roleTimeout);
-      clearTimeout(passionTimeout);
-      clearTimeout(infoTimeout);
-      clearTimeout(ideaTimeout);
-      clearTimeout(showScrollIconTimeout);
+      timeouts.forEach((timeout) => clearTimeout(timeout));
     };
   }, []);
 
@@ -140,6 +126,7 @@ const Resume: React.FC = () => {
       <Image
         height={80}
         alt="icon scroll"
+        loader={({ src }) => src}
         src={iconDown}
         className={`animated-icon scroll-icon ${showScrollIcon && "show"}`}
       />
@@ -156,7 +143,12 @@ const Resume: React.FC = () => {
         {info}
         {ideas}
         <Contacts />
-        <Image alt="logo" src={joaoalrc} className="joaoalrc" />
+        <Image
+          loader={({ src }) => src}
+          alt="logo"
+          src={joaoalrc}
+          className="joaoalrc"
+        />
         {scrollIcon}
       </section>
       <section className="last-section">
@@ -167,4 +159,4 @@ const Resume: React.FC = () => {
   );
 };
 
-export default Resume;
+export default memo(Resume);
