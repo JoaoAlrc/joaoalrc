@@ -1,17 +1,14 @@
-import reactNativeLogo from "@/app/assets/reactNative.svg";
-import reactLogo from "@/app/assets/react.svg";
-import typescriptLogo from "@/app/assets/typescript.svg";
-import reduxLogo from "@/app/assets/redux.svg";
-import threejsLogo from "@/app/assets/threejs.svg";
-import reactNativeFirebaseLogo from "@/app/assets/reactNativeFirebase.svg";
-import nextjsLogo from "@/app/assets/nextjs.svg";
-import nodejsLogo from "@/app/assets/nodejs.svg";
-import vuejsLogo from "@/app/assets/vuejs.svg";
-import angularLogo from "@/app/assets/angular.svg";
-import mysqlLogo from "@/app/assets/mysql.svg";
-
-export const macbookLink =
-  "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf";
+import reactNativeLogo from "@/app/assets/svg/reactNative.svg";
+import reactLogo from "@/app/assets/svg/react.svg";
+import typescriptLogo from "@/app/assets/svg/typescript.svg";
+import reduxLogo from "@/app/assets/svg/redux.svg";
+import threejsLogo from "@/app/assets/svg/threejs.svg";
+import reactNativeFirebaseLogo from "@/app/assets/svg/reactNativeFirebase.svg";
+import nextjsLogo from "@/app/assets/svg/nextjs.svg";
+import nodejsLogo from "@/app/assets/svg/nodejs.svg";
+import vuejsLogo from "@/app/assets/svg/vuejs.svg";
+import angularLogo from "@/app/assets/svg/angular.svg";
+import mysqlLogo from "@/app/assets/svg/mysql.svg";
 
 export const contactLinks = [
   {
@@ -27,8 +24,8 @@ export const contactLinks = [
     link: "https://www.instagram.com/joaoalrc/",
   },
   {
-    name: "code@joaoalrc.dev",
-    link: "mailto:code@joaoalrc.dev?cc=jv.alarcao@gmail.com&subject=Let's%20turn%20my%20dreams%20into%20codes!",
+    name: "jv.alarcao@gmail.com",
+    link: "mailto:jv.alarcao@gmail.com?subject=Let's%20turn%20my%20dreams%20into%20codes!",
   },
 ];
 

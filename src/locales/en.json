@@ -7,12 +7,15 @@
   },
   "experiences": {
     "experience": "EXPERIENCES",
-    "today": "TODAY",
+    "samba": "Senior Software Engineer - John Deere, Sambatech, MG (Remote)",
     "db1": "Senior Software Engineer - UDS, DB1, SP (Remote)",
-    "lean": "Senior React Native Developer - Lean Solutions Group, Coral Springs , FL (Remote)",
-    "sebrae": "Senior React Native Developer - Cast Group at Sebrae, PB (Remote)",
+    "lean": "Senior React Native Developer - Lean Solutions Group, Coral Springs - FL (Remote)",
+    "sebrae": "Senior React Native Developer - Sebrae, Cast Group, PB (Remote)",
     "neki": "Senior ReactJS Developer - Neki-IT, RJ (Remote)",
     "cashPago": "Middle React Native Developer - CashPago, SP (Remote - Freelancer)",
     "space": "FullStack Developer (Junior - Middle) - Space AdServer/2mobile, Brasília - DF"
+  },
+  "common": {
+    "today": "TODAY"
   }
 }
