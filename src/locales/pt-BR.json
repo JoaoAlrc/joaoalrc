@@ -7,12 +7,15 @@
   },
   "experiences": {
     "experience": "EXPERIÊNCIAS",
-    "today": "HOJE",
+    "samba": "Engenheiro de Software Sênior - John Deere, Sambatech, MG (Remoto)",
     "db1": "Engenheiro de Software Sênior - UDS, DB1, SP (Remoto)",
     "lean": "Desenvolvedor React Native Senior - Lean Solutions Group, Coral Springs , FL (Remoto)",
     "sebrae": "Desenvolvedor React Native Senior - Cast Group no app Sebrae, PB (Remoto)",
     "neki": "Desenvolvedor ReactJs Senior - Neki-IT, RJ (Remoto)",
     "cashPago": "Desenvolvedor React Native Pleno - CashPago, SP (Remoto - Freelancer)",
     "space": "Desenvolvedor FullStack (Junior - Pleno) - Space AdServer/2mobile, Brasília - DF"
+  },
+  "common": {
+    "today": "HOJE"
   }
 }

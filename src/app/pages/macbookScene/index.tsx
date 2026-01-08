@@ -9,20 +9,21 @@ import {
   Html,
   Sparkles,
   Text3D,
-  useMatcapTexture,
+  useTexture,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
 import Resume from "../resume/page";
 
-import { macbookLink } from "@/utils/links";
 import { isMobileDevice } from "@/utils";
 
 import "./style.css";
 
 function MacbookScene() {
-  const macbook = useGLTF(macbookLink);
-  const [matcapTexture] = useMatcapTexture("9D8F84_5D4544_D9D3C9_62555A", 256);
+  const macbook = useGLTF("/models/macbook.gltf");
+  const matcapTexture = useTexture(
+    "/matcaps/9D8F84_5D4544_D9D3C9_62555A-256px.png"
+  );
   const [mouseOn, setMouseOn] = useState<boolean>(false);
   const [easter, setEaster] = useState<boolean>(false);
   const easterTextRef = useRef<THREE.Mesh | null>(null);
@@ -150,3 +151,5 @@ function MacbookScene() {
 }
 
 export default MacbookScene;
+
+useGLTF.preload("/models/macbook.gltf");

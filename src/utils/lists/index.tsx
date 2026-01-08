@@ -1,12 +1,17 @@
 export const experiences = [
   {
+    startDate: "08/2023",
+    endDateT: "common.today",
+    role: "experiences.samba",
+  },
+  {
     startDate: "02/2023",
-    endDateT: "experiences.today",
+    endDate: "08/2023",
     role: "experiences.db1",
   },
   {
-    startDate: "02/2022",
-    endDate: "02/2023",
+    startDate: "01/2022",
+    endDate: "03/2023",
     role: "experiences.lean",
   },
   {
